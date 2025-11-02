@@ -43,7 +43,7 @@ pipeline {
                 script {
                     // 1. Build the Docker image (this part was already working)
                     echo "Building Docker image..."
-                    docker.build(env.ECR_REPO_NAME, ".")
+                    docker.build(env.ECR_REPO_NAME, "--platform linux/amd64 .")
 
                     // 2. Use the 'withCredentials' block to securely access your aws-creds
                     // This is a different, more direct way to use the credential
