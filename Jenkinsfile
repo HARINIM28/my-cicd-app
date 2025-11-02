@@ -85,21 +85,5 @@ pipeline {
         }
     }
     
-    post {
-        // This 'post' block runs after all stages
-        success {
-            echo 'Pipeline succeeded!'
-            // Add email notification step here
-            mail to: 'your-email@example.com',
-                 subject: "SUCCESS: Pipeline ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                 body: "Pipeline ran successfully. See build at ${env.BUILD_URL}"
-        }
-        failure {
-            echo 'Pipeline failed.'
-            // Add email notification step here
-            mail to: 'your-email@example.com',
-                 subject: "FAILED: Pipeline ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                 body: "Pipeline failed. See build at ${env.BUILD_URL}"
-        }
-    }
+    
 }
