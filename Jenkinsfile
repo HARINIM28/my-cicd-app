@@ -12,7 +12,7 @@ pipeline {
         AWS_CREDS           = "aws-creds" // The ID you gave your AWS credentials in Jenkins
         SSH_CREDS           = "ec2-ssh-key" // The ID you gave your SSH credentials in Jenkins
 
-        PATH                = "/usr/local/bin:${env.PATH}"
+        PATH                = "/usr/local/bin:/opt/homebrew/bin:${env.PATH}"
     }
 
     stages {
