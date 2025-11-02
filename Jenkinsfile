@@ -45,7 +45,7 @@ pipeline {
                     docker.build(env.ECR_REPO_NAME, ".")
                     
                     // Tag the image
-                    docker.withRegistry("https://://${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com", "aws-creds") {
+                    docker.withRegistry("https://${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com", "aws-creds") {
                         docker.image(env.ECR_REPO_NAME).push("${env.BUILD_NUMBER}")
                         docker.image(env.ECR_REPO_NAME).push("latest")
                     }
