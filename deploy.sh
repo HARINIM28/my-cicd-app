@@ -10,13 +10,13 @@ ECR_REPO_NAME="my-cicd-app"
 
 CONTAINER_NAME="my-app"
 
-# Log in to AWS ECR (this will now work thanks to the IAM Role)
+# Log in to AWS ECR
 aws ecr get-login-password --region ${AWS_REGION} | sudo docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 # Stop and remove the old container if it exists (using sudo)
 if [ $(sudo docker ps -a -q -f name=${CONTAINER_NAME}) ]; then
     echo "Stopping and removing old container..."
-    sudo docker stop ${CONTAINTAINER_NAME}
+    sudo docker stop ${CONTAINER_NAME}  # <-- This line is now fixed
     sudo docker rm ${CONTAINER_NAME}
 fi
 
