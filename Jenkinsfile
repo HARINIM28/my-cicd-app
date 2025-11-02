@@ -2,6 +2,11 @@
 pipeline {
     agent any
 
+    tools {
+        // This 'docker' name MUST match the 'Name' 
+        // you gave it in Global Tool Configuration
+        docker 'docker'
+    }
     // --- YOU MUST EDIT THESE VARIABLES ---
     environment {
         AWS_ACCOUNT_ID      = "711379610491" // Find this in the AWS console
