@@ -3,9 +3,8 @@ pipeline {
     agent any
 
     tools {
-        // This 'docker' name MUST match the 'Name' 
-        // you gave it in Global Tool Configuration
-        docker 'docker'
+        // The type is 'dockerTool', the name is 'docker'
+        dockerTool 'docker'
     }
     // --- YOU MUST EDIT THESE VARIABLES ---
     environment {
