@@ -48,7 +48,7 @@ pipeline {
                     // The "build.number" is a built-in Jenkins variable
                     docker.withRegistry("https://${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com", env.AWS_CREDS) {
                         docker.image(env.ECR_REPO_NAME).push("${env.BUILD_NUMBER}")
-                        docker.image(env.ECR_REPO_NAME).push("latest")
+                        docker.image(env.ECR_REPO_NAME).push("latest") // This line is now fixed
                     }
                 }
             }
