@@ -2,10 +2,7 @@
 pipeline {
     agent any
 
-    tools {
-        // The type is 'dockerTool', the name is 'docker'
-        dockerTool 'docker'
-    }
+    
     // --- YOU MUST EDIT THESE VARIABLES ---
     environment {
         AWS_ACCOUNT_ID      = "711379610491" // Find this in the AWS console
@@ -14,6 +11,8 @@ pipeline {
         EC2_PUBLIC_IP       = "3.90.44.19" // Get this from the EC2 dashboard
         AWS_CREDS           = "aws-creds" // The ID you gave your AWS credentials in Jenkins
         SSH_CREDS           = "ec2-ssh-key" // The ID you gave your SSH credentials in Jenkins
+
+        PATH                = "/usr/local/bin:${env.PATH}"
     }
 
     stages {
