@@ -37,30 +37,30 @@ pipeline {
        stage('Build & Tag Docker Image') {
             steps {
                 script {
-                    // 1. Build the Docker image 
+                     
                     echo "Building Docker image..."
                     docker.build(env.ECR_REPO_NAME, "--platform linux/amd64 .")
 
-                    // 2. Use the 'withCredentials' block to securely access your aws-creds
+                   
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', credentialsId: 'aws-creds')]) {
                         
                         echo "Logging in to AWS ECR..."
-                        // 3. Get the login password from AWS and pipe it to docker login
+                        
                         sh "aws ecr get-login-password --region ${env.AWS_REGION} | docker login --username AWS --password-stdin ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com"
                         
                         echo "Tagging image for ECR..."
-                        // 4. Tag the image with the full ECR path and build number
+                        
                         sh "docker tag ${env.ECR_REPO_NAME}:latest ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/${env.ECR_REPO_NAME}:${env.BUILD_NUMBER}"
                         
-                        // 5. Tag the image with the full ECR path and 'latest'
+                        
                         sh "docker tag ${env.ECR_REPO_NAME}:latest ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/${env.ECR_REPO_NAME}:latest"
 
                         echo "Pushing image with build number..."
-                        // 6. Push the build number tag
+                        
                         sh "docker push ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/${env.ECR_REPO_NAME}:${env.BUILD_NUMBER}"
                         
                         echo "Pushing image with latest tag..."
-                        // 7. Push the 'latest' tag
+                        
                         sh "docker push ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/${env.ECR_REPO_NAME}:latest"
                     }
                 }
