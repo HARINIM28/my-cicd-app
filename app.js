@@ -19,7 +19,7 @@ if (APP_VERSION.toLowerCase() === 'green') {
   cardColor = 'bg-white';
   textColor = 'text-blue-800';
   ringColor = 'ring-blue-500';
-  versionColor = 'text-blue-600';
+  versionColor = 'text-green-600';
 }
 
 
